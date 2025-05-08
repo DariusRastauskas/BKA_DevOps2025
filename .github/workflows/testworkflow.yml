@@ -1,0 +1,17 @@
+name: Hello World Action
+on:
+ push:
+  branches: main
+
+jobs:
+ say_hello:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout kodą
+    uses: actions/checkout@v3
+  - name: Pasveikinimo žinutė
+    run: echo "Labas iš GitHub Actions!"
+
+ git commit -am "Trigger GitHub Actions"
+ git push
+- Patikrinkite rezultatą GitHub -> Actions skiltyje.
