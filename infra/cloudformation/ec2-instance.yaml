@@ -34,13 +34,15 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t3.micro
-      ImageId: ami-077d5785555aeb549  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
+      ImageId: ami-077d5785555aeb549 
       IamInstanceProfile: !Ref DevOpsInstanceProfile
       KeyName: dariusKeypair
-      SecurityGroupIds:
-        - !Ref DevOpsEC2SecurityGroup
-      SubnetId: subnet-02c3510a15dfb4116  # Iš anksto sukurto potinklio ID
-      AssociatePublicIpAddress: true
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: subnet-02c3510a15dfb4116
+          GroupSet:
+            - !Ref DevOpsEC2SecurityGroup
       Tags:
         - Key: Name
           Value: DevOps-GitHub-EC2
