@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Free Tier EC2 Instance for DevOps Lab
+Resources:
+  DevOpsEC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+  DevOpsEC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access for DevOps EC2
+      VpcId: vpc-037e36c83a1e651c7  # Replace with your VPC ID
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 78.62.62.193/32
+
+  DevOpsInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref DevOpsEC2Role
+  DevOpsEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-09e9f5a44ec0edcf7  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
+      IamInstanceProfile: !Ref DevOpsInstanceProfile
+      KeyName: DevOpsDemoKey
+      SecurityGroupIds:
+        - !Ref DevOpsEC2SecurityGroup
+      SubnetId: subnet-02c3510a15dfb4116  # Iš anksto sukurto potinklio ID
+      Tags:
+        - Key: Name
+          Value: DevOps-GitHub-EC2
