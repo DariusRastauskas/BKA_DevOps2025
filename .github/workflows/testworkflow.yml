@@ -1,7 +1,7 @@
 name: Hello World Action
 on:
  push:
-  branches: main
+  branches: mains
 
 jobs:
  say_hello:
