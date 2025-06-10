@@ -34,9 +34,9 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-09e9f5a44ec0edcf7  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
+      ImageId: ami-077d5785555aeb549  # Pakeiskite į naujausią Amazon Linux 2 AMI eu-west-1 regione
       IamInstanceProfile: !Ref DevOpsInstanceProfile
-      KeyName: DevOpsDemoKey
+      KeyName: dariusKeypair
       SecurityGroupIds:
         - !Ref DevOpsEC2SecurityGroup
       SubnetId: subnet-02c3510a15dfb4116  # Iš anksto sukurto potinklio ID
