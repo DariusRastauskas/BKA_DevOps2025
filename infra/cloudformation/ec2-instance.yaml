@@ -40,6 +40,7 @@ Resources:
       SecurityGroupIds:
         - !Ref DevOpsEC2SecurityGroup
       SubnetId: subnet-02c3510a15dfb4116  # Iš anksto sukurto potinklio ID
+      AssociatePublicIpAddress: true
       Tags:
         - Key: Name
           Value: DevOps-GitHub-EC2
